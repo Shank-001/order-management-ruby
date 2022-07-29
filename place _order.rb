@@ -1,4 +1,6 @@
+# OBSOLETE
 module PlaceOrder
+  @@no_of_order = 0
   def placing_order
     print 'Choose your order: '
     # Getting choice from user.
@@ -20,6 +22,7 @@ module PlaceOrder
       puts 'Order placed for Shorts.'
       @@no_of_order += 1
     when 0
+      puts "Number of Orders: #{@@no_of_order}"
       puts 'Exited.'
       exit
     else
@@ -33,6 +36,7 @@ module PlaceOrder
     if %w[Y y].include?(choice1)
       placing_order
     else
+      puts "Number of Orders: #{@@no_of_order}"
       puts 'Exited.'
       exit
     end
