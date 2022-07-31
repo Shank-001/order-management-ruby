@@ -1,6 +1,7 @@
 module Admin
   def show
     puts '------Admin Dashboard------'
+    
   end
 
   def add_item
