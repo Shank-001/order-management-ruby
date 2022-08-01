@@ -32,7 +32,8 @@ module PlaceOrder
 
     puts 'Do you want to place more order: (Y[es]/N[o])'
     choice1 = gets.chomp
-    # if choice1 == ('Y' || 'y')        --Invalid Syntax--
+    # if choice1 == ('Y' || 'y')        --Wrong Login/Syntax--
+    # if choice1 == 'Y' || choice1 ==  'y'      --Valid Logic/Syntax--
     if %w[Y y].include?(choice1)
       placing_order
     else
