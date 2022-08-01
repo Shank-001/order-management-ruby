@@ -4,9 +4,9 @@ require 'user'
 
 module Login
   @@admin_name = 'Shank'
-  @@admin_password = 'Pro@123'
-  include Admin
-  include User
+  @@admin_password = 'pro123'
+  extend Admin
+  extend User
 
   def login
     puts "\n------Login------"
@@ -15,19 +15,21 @@ module Login
     print 'Enter Password: '
     password = gets.chomp
     puts
-    
+
     if username == @@admin_name && password == @@admin_password
       # Proceed to Admin Dashboard
-      Main.new.show
+      Login.select_admin_operation
+      logout
     elsif username == @username && password == @password
       # Proceed to User Dashboard
-      Main.new.show
+      Login.select_user_operation
+      logout
     else
       puts 'Authentication Failed! Try again.'
       login
     end
   end
-  
+
   def signup
     puts "\n------Signup------"
     print 'Enter Username: '
@@ -51,10 +53,26 @@ module Login
       login
     elsif user_type == 'b'
       # Calling Signup
-      signup
+      # If already signed up then login.
+      if @username.nil?
+        signup
+      else
+        login
+      end
     else
       puts 'Invalid key entered. Try again.'
       check_user
     end
+  end
+
+  def logout
+    puts "\nDo you want to continue to Home Page: (Y[es]/N[o])"
+      choice = gets.chomp
+      if %w[Y y].include?(choice)
+        check_user
+      else
+        puts "\nThank You. Visit Again :)"
+        exit
+      end
   end
 end
