@@ -37,8 +37,6 @@ class Login
 
   def signup
     puts "\n------Signup------"
-    print 'Enter Username: '
-    @username = gets.chomp
     print 'Enter E-mail: '
     @email = gets.chomp
     if @email == @@admin_email
@@ -75,22 +73,6 @@ class Login
       check_user
     end
   end
-
-  # # Signup Multiple User.
-  # def login_operations
-  #   puts "\nSignup/Login to continue."
-  #   print "Enter 'a' to Signup or 'b' to Login: "
-  #   choice = gets.chomp
-
-  #   if choice == 'a'
-  #     signup
-  #   elsif choice == 'b'
-  #     login
-  #   else
-  #     puts 'Invalid key entered. Try again.'
-  #     login_operations
-  #   end
-  # end
 
   def logout
     puts "\nDo you want to continue to Home Page: (Y[es]/N[o])"

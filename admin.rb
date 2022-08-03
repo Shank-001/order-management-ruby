@@ -77,15 +77,4 @@ module Admin
     Product.update(name, quantity)
     puts "Added #{quantity} #{name} in stock successfully."
   end
-
-  # def show_user_database
-  #   unless $user_database.empty?
-  #     # $user_database.each do |user_detail|
-  #     #   print "* #{user_detail}"
-  #     # end
-  #     puts $user_database
-  #   else
-  #     puts "No user found. Database is empty."
-  #   end
-  # end
 end

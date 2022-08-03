@@ -3,8 +3,6 @@ require 'product'
 require 'order'
 
 module User
-  # USER_BASE = []
-
   def select_user_operation
     puts "\n------User Dashboard------"
     puts "\n1. Show items

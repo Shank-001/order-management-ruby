@@ -26,22 +26,6 @@ class Order
         @bill_amount += (price * quantity)
         puts "Amount to be paid: Rs.#{@bill_amount}"
       end
-      # return bill_amount
     end
   end
-
-  # def self.generate_bill(name, quantity)
-  #   if @bill_amount == 0
-  #     result_arr = search_by(name)
-  #     result_arr.find do |item|
-  #       @bill_amount = item.price * quantity
-  #     end
-  #   else
-  #     result_arr = search_by(name)
-  #     result_arr.find do |item|
-  #       @bill_amount += item.price * quantity
-  #     end
-  #   end
-  #   # return bill_amount
-  # end
 end
