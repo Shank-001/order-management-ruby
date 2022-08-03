@@ -1,12 +1,18 @@
 $LOAD_PATH << '.'
 require 'admin'
 require 'user'
+require 'byebug'
 
 class Login
   @@admin_email = 'admin'
   @@admin_password = '123'
   include Admin
   include User
+
+  def initiate
+    puts '------------Welcome to eStuff.com------------'
+    check_user
+  end
 
   def login
     puts "\n------Login------"
@@ -20,7 +26,6 @@ class Login
       select_admin_operation
       logout
       elsif email == @email && password == @password
-    # elsif $user_database.each {|user| user.include?(email)} && $user_database.each {|user| user.include?(password)}
       # Proceed to User Dashboard
       select_user_operation
       logout
@@ -43,9 +48,7 @@ class Login
     print 'Enter Password: '
     @password = gets.chomp
 
-    # Saving user details to database.
-    user_detail = [@username, @email, @password]
-    $user_database.push(user_detail)
+    # Saving user details to database. (Coming soon...)
     puts 'Successfully Signed Up.'
     logout
   end
@@ -93,11 +96,13 @@ class Login
     puts "\nDo you want to continue to Home Page: (Y[es]/N[o])"
     choice = gets.chomp
     if %w[Y y].include?(choice)
-      Login.new.check_user
+      check_user
       # Login.new.login_operations
     else
       puts "\nThank You. Visit Again :)"
       exit
     end
   end
+
+  Login.new.initiate
 end
