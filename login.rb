@@ -25,7 +25,7 @@ class Login
       # Proceed to Admin Dashboard
       select_admin_operation
       logout
-      elsif email == @email && password == @password
+    elsif email == @email && password == @password
       # Proceed to User Dashboard
       select_user_operation
       logout
@@ -38,13 +38,18 @@ class Login
   def signup
     puts "\n------Signup------"
     print 'Enter E-mail: '
-    @email = gets.chomp
+    @email = gets.strip
     if @email == @@admin_email
       puts 'ID already taken. Try Again.'
       signup
     end
     print 'Enter Password: '
     @password = gets.chomp
+
+    if @email.empty? || @password.length < 3
+      puts 'Invalid input in Email/Password field! Try again.'
+      signup
+    end
 
     # Saving user details to database. (Coming soon...)
     puts 'Successfully Signed Up.'
@@ -53,7 +58,7 @@ class Login
 
   # Checking type of user.
   def check_user
-    puts 'Signup/Login to continue.'
+    puts "\nSignup/Login to continue."
     print "\nEnter 'a' for Admin or 'b' for User: "
     user_type = gets.chomp
 
@@ -80,11 +85,14 @@ class Login
     if %w[Y y].include?(choice)
       check_user
       # Login.new.login_operations
-    else
+    elsif %w[N n].include?(choice)
       puts "\nThank You. Visit Again :)"
       exit
+    else
+      puts 'Invalid key entered. Try again.'
+      logout
     end
   end
-
+  
   Login.new.initiate
 end

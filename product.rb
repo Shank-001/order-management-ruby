@@ -17,16 +17,29 @@ class Product
   end
 
   class << self
+    # Here all methods are Class methods
+
     def create(name, price, quantity)
       item = Product.new(name, price, quantity)
       ITEMS.push(item)
     end
 
+    # # NOT WORKING: Prevent adding item same name, Update instead.
+    # def create(name, price, quantity)
+    #   result_arr = search_by(name) # Common in delete (Make class variable)
+    #   if result_arr.each {|item| item.include?(name)}
+    #     puts "\nSimilar item exists in stock. Update instead."
+    #   else
+    #     item = Product.new(name, price, quantity)
+    #     ITEMS.push(item)
+    #   end
+    # end
+
     def read
       if ITEMS.empty?
-        puts 'Item list is empty!'
+        puts "\nItem list is empty!"
       else
-        puts 'Id   | Name     | Price     | Quantity'
+        puts "\nId   | Name     | Price     | Quantity"
         ITEMS.each do |item|
           puts "-#{item.id}-  | #{item.name}    | Rs.#{item.price}     | #{item.quantity}"
         end
@@ -36,7 +49,7 @@ class Product
     def update(name, quantity)
       result_arr = search_by(name)
       if result_arr.empty?
-        puts 'Item not found!'
+        puts "\nItem not found!"
       else
         result_arr.find do |item|
           item.quantity += quantity
@@ -47,13 +60,13 @@ class Product
     def delete(name, quantity)
       result_arr = search_by(name)
       if result_arr.empty?
-        puts 'Item not found!'
+        puts "\nItem not found!"
       else
         result_arr.find do |item|
           if item.quantity >= quantity
             item.quantity -= quantity
           else
-            puts "Only #{item.quantity} #{name} is/are present in stock."
+            puts "\nSorry! Only #{item.quantity} #{name} is/are present in stock."
           end
         end
       end
@@ -63,4 +76,9 @@ class Product
       ITEMS.select { |item| item.name == name }
     end
   end
+
+  #Default products
+  create("Apple", 100, 51)
+  create("Banana", 20, 101)
+  create("Mango", 50, 151)
 end
