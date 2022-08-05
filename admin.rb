@@ -9,7 +9,7 @@ module Admin
           \n 2. Show items
           \n 3. Update item
           \n 4. Remove item
-          \n 5. Order details (Coming soon...)
+          \n 5. Order details
           \n 0. Logout"
     print "\nSelect operation: "
     choice = gets.to_i
@@ -22,8 +22,8 @@ module Admin
       update_item
     when 4
       remove_item
-    # when 5
-    #   Order.get_order_details
+    when 5
+      Order.read_order
     when 0
       Login.new.logout
     else

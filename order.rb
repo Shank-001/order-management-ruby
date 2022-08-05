@@ -25,19 +25,21 @@ class Order
           puts "-#{item.id}-  | #{item.name}    | Rs.#{item.amount}     | #{item.quantity}"
           total_amount += item.amount
         end
-        puts "\nTotal order amount: #{total_amount}"
+        puts "\nTotal order amount: Rs.#{total_amount}"
       end
     end
 
-    # def generate_bill(price, quantity)
-    #   if @bill_amount.nil?
-    #     @bill_amount = price * quantity
-    #     puts "Amount to be paid: Rs.#{@bill_amount}"
-    #   else
-    #     @bill_amount += (price * quantity)
-    #     puts "Amount to be paid: Rs.#{@bill_amount}"
-    #   end
-    # end
+    def delete_order
+      if @Orders.empty?
+        puts "\nNothing to cancel. You do not have placed any order!"
+      else
+        @Orders.each do |item|
+          Product.update(item.name, nil, item.quantity)
+        end
+        @Orders.clear
+      end
+    end
+
   end
 end
 
@@ -54,4 +56,14 @@ end
 # @@order_id = 0
 # def generate_order_id
 #   @@order_id += 1
+# end
+
+# def generate_bill(price, quantity)
+#   if @bill_amount.nil?
+#     @bill_amount = price * quantity
+#     puts "Amount to be paid: Rs.#{@bill_amount}"
+#   else
+#     @bill_amount += (price * quantity)
+#     puts "Amount to be paid: Rs.#{@bill_amount}"
+#   end
 # end

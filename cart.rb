@@ -46,7 +46,7 @@ class Cart
           puts "-#{item.id}-  | #{item.name}    | Rs.#{item.amount}     | #{item.quantity}"
           total_amount += item.amount
         end
-        puts "\nTotal amount: #{total_amount}"
+        puts "\nTotal amount: Rs.#{total_amount}"
       end
     end
     

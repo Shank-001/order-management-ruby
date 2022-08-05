@@ -30,6 +30,7 @@ class Product
     end
 
     def read
+      puts "--Items in stock--"
       if ITEMS.empty?
         puts "\nItem list is empty!"
       else

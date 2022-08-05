@@ -11,7 +11,7 @@ module User
           \n 3. Add to cart
           \n 4. Remove from cart
           \n 5. Place order
-          \n 6. Cancel order (Coming soon...)
+          \n 6. Cancel order
           \n 7. Show my orders
           \n 0. Logout"
     print "\nSelect operation: "
@@ -27,8 +27,8 @@ module User
       remove_from_cart
     when 5
       place_order
-    # when 6
-    #   cancel_order
+    when 6
+      cancel_order
     when 7
       Order.read_order
     when 0
@@ -74,13 +74,8 @@ module User
   end
 
   def cancel_order
-    print "\nEnter item name you want to cancel: "
-    name = gets.chomp
-    print "How many #{name} you want to cancel: "
-    quantity = gets.to_i
-    Product.update(name, nil, quantity)
     # Update order details   # Coming soon...
-    Order.generate_bill(price, quantity)
-    puts "Order cancelled for #{quantity} #{name} successfully."
+    Order.delete_order
+    puts "Order cancelled successfully."
   end
 end
