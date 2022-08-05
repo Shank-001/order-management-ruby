@@ -91,7 +91,7 @@ class Login
       check_user
       # Login.new.login_operations
     elsif %w[N n].include?(choice)
-      puts "\nThank You. Visit Again :)"
+      puts "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Thank You. Visit Again :)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
       exit
     else
       puts 'Invalid key entered. Try again.'

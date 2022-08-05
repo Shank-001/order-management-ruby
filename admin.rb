@@ -1,6 +1,7 @@
 $LOAD_PATH << '.'
 require 'product'
 require 'order'
+require 'byebug'
 
 module Admin
   def select_admin_operation
@@ -46,6 +47,7 @@ module Admin
       Product.create(name, price, quantity)
     end
     puts "\nProduct added successfully."
+    # byebug
     puts "\nDo you want to add more: (Y[es]/N[o])"
     choice = gets.chomp
     add_item if %w[Y y].include?(choice)
