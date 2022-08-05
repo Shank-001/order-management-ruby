@@ -16,25 +16,20 @@ module Admin
     case choice
     when 1
       add_item
-      select_admin_operation
     when 2
       Product.read
-      select_admin_operation
     when 3
       update_item
-      select_admin_operation
     when 4
       remove_item
-      select_admin_operation
     # when 5
     #   Order.get_order_details
-    #   select_admin_operation
     when 0
-      # Logout
+      Login.new.logout
     else
       puts 'Invalid Selection! Please try again.'
-      select_admin_operation
     end
+    select_admin_operation
   end
 
   def add_item
@@ -70,7 +65,7 @@ module Admin
     name = gets.chomp
     print "How many #{name} you want to add: "
     quantity = gets.to_i
-    Product.update(name, quantity)
+    Product.update(name, nil, quantity)
     puts "\nAdded #{quantity} #{name} in stock successfully."
   end
 end

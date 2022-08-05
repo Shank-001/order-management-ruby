@@ -10,40 +10,33 @@ module User
           \n 2. Show my cart
           \n 3. Add to cart
           \n 4. Remove from cart
-          \n 5. Buy Product (Coming soon...)
+          \n 5. Place order
           \n 6. Cancel order (Coming soon...)
-          \n 7. Order details (Coming soon...)
+          \n 7. Show my orders
           \n 0. Logout"
     print "\nSelect operation: "
     choice = gets.to_i
     case choice
     when 1
       Product.read
-      select_user_operation
     when 2
       Cart.reading
-      select_user_operation
     when 3
       add_to_cart
-      select_user_operation
     when 4
       remove_from_cart
-      select_user_operation
-    # when 5
-    #   buy_product
-    #   select_user_operation
+    when 5
+      place_order
     # when 6
     #   cancel_order
-    #   select_user_operation
-    # when 7
-    #   User.get_order_details
-    #   select_user_operation
+    when 7
+      Order.read_order
     when 0
-      # Logout
+      Login.new.logout
     else
       puts 'Invalid Selection! Please try again.'
-      select_user_operation
     end
+    select_user_operation
   end
 
   def add_to_cart
@@ -67,23 +60,17 @@ module User
     print "How many #{name} you want to remove from cart: "
     quantity = gets.to_i
     Cart.deleting(name, quantity)
-    Product.update(name, quantity)
+    Product.update(name, nil, quantity)
     puts "Removed #{quantity} #{name} from cart successfully."
   end
 
-  def buy_product
-    print "\nEnter item name you want to buy: "
-    name = gets.chomp
-    print "How many #{name} you want to buy: "
-    quantity = gets.to_i
-    Order.place_order(name, quantity)
-    # No of orders += 1
-    puts "Order placed for #{quantity} #{name} successfully. :)"
-    puts "\nDo you want to place more order: (Y[es]/N[o])"
-    choice = gets.chomp
-    # if choice == ('Y' || 'y')        --Wrong Login/Syntax--
-    # if choice == 'Y' || choice ==  'y'      --Valid Logic/Syntax--
-    buy_product if %w[Y y].include?(choice)
+  def place_order
+    print "Press 1 to confirm the order or Press any key to exit: "
+    choice = gets.to_i
+    if choice == 1
+      Order.add_order
+      puts "Order placed successfully. :)"
+    end
   end
 
   def cancel_order
@@ -91,7 +78,7 @@ module User
     name = gets.chomp
     print "How many #{name} you want to cancel: "
     quantity = gets.to_i
-    Product.update(name, quantity)
+    Product.update(name, nil, quantity)
     # Update order details   # Coming soon...
     Order.generate_bill(price, quantity)
     puts "Order cancelled for #{quantity} #{name} successfully."

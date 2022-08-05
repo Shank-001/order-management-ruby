@@ -26,6 +26,7 @@ class Login
       select_admin_operation
       logout
     elsif email == @email && password == @password
+      @@user_email = email
       # Proceed to User Dashboard
       select_user_operation
       logout
@@ -33,6 +34,10 @@ class Login
       puts 'Authentication Failed! Try again.'
       login
     end
+  end
+
+  def self.get_user_email
+    @@user_email
   end
 
   def signup

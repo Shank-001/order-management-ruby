@@ -1,31 +1,57 @@
 $LOAD_PATH << '.'
-require 'product'
+require 'cart'
 
 class Order
   class << self
-    def place_order(name, quantity)
-      result_arr = Product.search_by(name)
-      if result_arr.empty?
-        puts 'Item not found!'
+    # Here all methods are Class methods
+
+    def add_order
+      if Cart::CART.empty?
+        puts "\nNothing to order. Your cart is empty!"
       else
-        result_arr.find do |item|
-          if item.quantity >= quantity
-            generate_bill(item.price, quantity)
-          else
-            puts "Only #{item.quantity} #{name} available in stock"
-          end
-        end
+        @Orders = Cart::CART.clone
+        Cart::CART.clear
       end
     end
 
-    def generate_bill(price, quantity)
-      if @bill_amount.nil?
-        @bill_amount = price * quantity
-        puts "Amount to be paid: Rs.#{@bill_amount}"
+    def read_order
+      puts "\n--Your Orders--"
+      total_amount = 0
+      if @Orders.empty?
+        puts "\nNo order details found."
       else
-        @bill_amount += (price * quantity)
-        puts "Amount to be paid: Rs.#{@bill_amount}"
+        puts "\nId   | Name     | Amount     | Quantity"
+        @Orders.each do |item|
+          puts "-#{item.id}-  | #{item.name}    | Rs.#{item.amount}     | #{item.quantity}"
+          total_amount += item.amount
+        end
+        puts "\nTotal order amount: #{total_amount}"
       end
     end
+
+    # def generate_bill(price, quantity)
+    #   if @bill_amount.nil?
+    #     @bill_amount = price * quantity
+    #     puts "Amount to be paid: Rs.#{@bill_amount}"
+    #   else
+    #     @bill_amount += (price * quantity)
+    #     puts "Amount to be paid: Rs.#{@bill_amount}"
+    #   end
+    # end
   end
 end
+
+# attr_accessor :id, :order_name, :order_amount, :order_quantity
+
+# def initialize(name, amount, quantity)
+#   @id = generate_order_id
+#   # @user_email = Login.get_user_email
+#   @order_name = Cart.name
+#   @order_amount = Cart.amount
+#   @order_quantity = Cart.quantity
+# end
+
+# @@order_id = 0
+# def generate_order_id
+#   @@order_id += 1
+# end

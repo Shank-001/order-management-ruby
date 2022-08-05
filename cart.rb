@@ -36,6 +36,7 @@ class Cart
     end
     
     def reading
+      puts "\n--Your Cart--"
       total_amount = 0
       if CART.empty?
         puts "\nYour cart is empty!"

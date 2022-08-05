@@ -1,4 +1,4 @@
-# OBSOLETE
+# -------------------------------OBSOLETE-------------------------------
 module PlaceOrder
   @@no_of_order = 0
   def placing_order
@@ -29,7 +29,7 @@ module PlaceOrder
       puts "Invalid Selection!\nPlease try again."
       placing_order
     end
-
+    
     puts 'Do you want to place more order: (Y[es]/N[o])'
     choice1 = gets.chomp
     # if choice1 == ('Y' || 'y')        --Wrong Login/Syntax--
@@ -43,3 +43,4 @@ module PlaceOrder
     end
   end
 end
+# -------------------------------OBSOLETE-------------------------------

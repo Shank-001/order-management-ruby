@@ -20,20 +20,14 @@ class Product
     # Here all methods are Class methods
 
     def create(name, price, quantity)
-      item = Product.new(name, price, quantity)
-      ITEMS.push(item)
+      result_arr = search_by(name)
+      if result_arr.empty?
+        item = Product.new(name, price, quantity)
+        ITEMS.push(item)
+      else
+        update(name, price, quantity)
+      end
     end
-
-    # # NOT WORKING: Prevent adding item same name, Update instead.
-    # def create(name, price, quantity)
-    #   result_arr = search_by(name) # Common in delete (Make class variable)
-    #   if result_arr.each {|item| item.include?(name)}
-    #     puts "\nSimilar item exists in stock. Update instead."
-    #   else
-    #     item = Product.new(name, price, quantity)
-    #     ITEMS.push(item)
-    #   end
-    # end
 
     def read
       if ITEMS.empty?
@@ -46,12 +40,13 @@ class Product
       end
     end
 
-    def update(name, quantity)
+    def update(name, price, quantity)
       result_arr = search_by(name)
       if result_arr.empty?
         puts "\nItem not found!"
       else
         result_arr.find do |item|
+          item.price = price unless price.nil?
           item.quantity += quantity
         end
       end
@@ -77,8 +72,8 @@ class Product
     end
   end
 
-  #Default products
-  create("Apple", 100, 51)
-  create("Banana", 20, 101)
-  create("Mango", 50, 151)
+  # Default products
+  create('Apple', 100, 51)
+  create('Banana', 20, 101)
+  create('Mango', 50, 151)
 end
