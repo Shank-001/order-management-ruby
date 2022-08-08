@@ -1,6 +1,7 @@
 $LOAD_PATH << '.'
 require 'product'
 require 'order'
+require 'byebug'
 
 module Admin
   def select_admin_operation
@@ -9,32 +10,27 @@ module Admin
           \n 2. Show items
           \n 3. Update item
           \n 4. Remove item
-          \n 5. Order details (Coming soon...)
+          \n 5. Order details
           \n 0. Logout"
     print "\nSelect operation: "
     choice = gets.to_i
     case choice
     when 1
       add_item
-      select_admin_operation
     when 2
       Product.read
-      select_admin_operation
     when 3
       update_item
-      select_admin_operation
     when 4
       remove_item
-      select_admin_operation
-    # when 5
-    #   Order.get_order_details
-    #   select_admin_operation
+    when 5
+      Order.read_order
     when 0
-      # Logout
+      Login.new.logout
     else
       puts 'Invalid Selection! Please try again.'
-      select_admin_operation
     end
+    select_admin_operation
   end
 
   def add_item
@@ -51,6 +47,7 @@ module Admin
       Product.create(name, price, quantity)
     end
     puts "\nProduct added successfully."
+    # byebug
     puts "\nDo you want to add more: (Y[es]/N[o])"
     choice = gets.chomp
     add_item if %w[Y y].include?(choice)
@@ -70,7 +67,7 @@ module Admin
     name = gets.chomp
     print "How many #{name} you want to add: "
     quantity = gets.to_i
-    Product.update(name, quantity)
+    Product.update(name, nil, quantity)
     puts "\nAdded #{quantity} #{name} in stock successfully."
   end
 end

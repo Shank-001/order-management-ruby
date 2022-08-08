@@ -36,6 +36,7 @@ class Cart
     end
     
     def reading
+      puts "\n--Your Cart--"
       total_amount = 0
       if CART.empty?
         puts "\nYour cart is empty!"
@@ -45,7 +46,7 @@ class Cart
           puts "-#{item.id}-  | #{item.name}    | Rs.#{item.amount}     | #{item.quantity}"
           total_amount += item.amount
         end
-        puts "\nTotal amount: #{total_amount}"
+        puts "\nTotal amount: Rs.#{total_amount}"
       end
     end
     
