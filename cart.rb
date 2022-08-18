@@ -20,21 +20,26 @@ class Cart
 
   class << self
     # Here all methods are Class methods
-    
+
     def adding(name, quantity)
-      found_arr = find_in_cart(name) 
+      found_arr = find_in_cart(name)
       if found_arr.empty?
         result_arr = Product.search_by(name)
         result_arr.find do |item|
-          amount = (item.price * quantity)   # Check we can use Product.item.amount
-          cart_item = Cart.new(name, amount, quantity)
-          CART.push(cart_item)  # push new cart_item_object
+          if item.quantity >= quantity
+            amount = (item.price * quantity) 
+            cart_item = Cart.new(name, amount, quantity)
+            CART.push(cart_item)  
+          else
+            puts "\nSorry! Only #{item.quantity} #{name} is/are present in stock."
+          end
         end
       else
         updating(name, quantity)
       end
     end
-    
+
+    # byebug
     def reading
       puts "\n--Your Cart--"
       total_amount = 0
@@ -49,9 +54,9 @@ class Cart
         puts "\nTotal amount: Rs.#{total_amount}"
       end
     end
-    
+
     def updating(name, quantity)
-      found_arr = find_in_cart(name) 
+      found_arr = find_in_cart(name)
       if found_arr.empty?
         puts "\nItem not found in cart!"
       else
@@ -64,9 +69,9 @@ class Cart
         end
       end
     end
-    
-    def deleting(name, quantity) 
-      found_arr = find_in_cart(name) 
+
+    def deleting(name, quantity)
+      found_arr = find_in_cart(name)
       if found_arr.empty?
         puts "\nItem not found in cart!"
       else

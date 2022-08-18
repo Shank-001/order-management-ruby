@@ -15,9 +15,9 @@ class Order
     end
 
     def read_order
-      puts "\n--Your Orders--"
+      puts "\n--Orders Details--"
       total_amount = 0
-      if @Orders.empty?
+      if @Orders.nil? || @Orders.empty?
         puts "\nNo order details found."
       else
         puts "\nId   | Name     | Amount     | Quantity"

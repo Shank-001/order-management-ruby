@@ -65,7 +65,7 @@ module User
   end
 
   def place_order
-    print "Press 1 to confirm the order or Press any key to exit: "
+    print "Press 1 to confirm the order or Press any other key to exit: "
     choice = gets.to_i
     if choice == 1
       Order.add_order
@@ -75,7 +75,11 @@ module User
 
   def cancel_order
     # Update order details   # Coming soon...
-    Order.delete_order
-    puts "Order cancelled successfully."
+    print "Press 1 to confirm cancellation or Press any other key to exit: "
+    choice = gets.to_i
+    if choice == 1
+      Order.delete_order
+      puts "Order cancelled successfully."
+    end
   end
 end
